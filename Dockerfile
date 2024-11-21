@@ -23,6 +23,4 @@ RUN ./mvnw clean install -DskipTests
 ENTRYPOINT ["java","-jar","/root/target/prueba-0.0.1-SNAPSHOT.jar"]
 
 
-RUN ./mvnw clean install -DskipTests
-
 
