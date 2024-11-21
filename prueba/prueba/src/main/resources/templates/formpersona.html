@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Formulario de Persona</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+        background-color: #f4f7fa;
+        font-family: Arial, sans-serif;
+        animation: fadeIn 1s ease-in;
+    }
+
+    .form-container {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        animation: fadeInUp 1s forwards;
+    }
+
+    .form-header {
+        background-color: #004080;
+        color: white;
+        border-radius: 8px 8px 0 0;
+        padding: 15px;
+        text-align: center;
+        font-size: 1.5rem;
+        animation: slideIn 0.5s ease-in-out;
+    }
+
+    .btn-primary {
+        background-color: #004080;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #003366;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(-100%);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
+  </style>
+</head>
+<body>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="form-container">
+        <div class="form-header">
+          <h2 th:text="${#strings.isEmpty(persona.id) ? 'Agregar Persona' : 'Editar Persona'}">Agregar Persona</h2>
+        </div>
+        <form th:action="@{/personas/guardar}" th:object="${persona}" method="post">
+          <input type="hidden" th:field="*{id}" />
+
+          <div class="form-group mt-3">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" class="form-control" required placeholder="Nombre">
+          </div>
+
+          <div class="form-group">
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" th:field="*{apellido}" class="form-control" required placeholder="Apellido">
+          </div>
+
+          <div class="form-group">
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" th:field="*{telefono}" class="form-control" required placeholder="Teléfono">
+          </div>
+
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+            <a href="/" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
